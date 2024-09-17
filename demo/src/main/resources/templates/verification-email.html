@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 50px auto;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+
+        .button-frame {
+            display: inline-block;
+            border: 2px solid #41A0EE;
+            border-radius: 50px;
+            padding: 12px 20px;
+            background-color: #41A0EE; /* Buton arka planını mavi yaptık */
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Buton içindeki yazıyı beyaz arka planla sarıyoruz */
+        .button-frame span {
+            background-color: white; /* Yazının arka planı beyaz */
+            color: #41A0EE; /* Yazı rengi mavi */
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .button-frame:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            font-size: 16px;
+            color: #555555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <p>Merhaba,</p>
+    <p>
+        E-posta adresinizi doğrulamak için aşağıdaki butona tıklayın:
+    </p>
+    <a th:href="@{${verificationUrl}}" class="button-frame">
+        <span>E-posta doğrula</span>
+    </a>
+    <p>
+        Eğer bu talebi siz yapmadıysanız, bu e-postayı görmezden gelebilirsiniz.
+    </p>
+    <p>Teşekkürler,</p>
+</div>
+</body>
+</html>

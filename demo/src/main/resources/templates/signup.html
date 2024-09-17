@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Signup</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+        .signup-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 30px;
+            font-weight: 600;
+            color: #4a4a4a;
+        }
+        label {
+            display: block;
+            text-align: left;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: calc(100% - 20px);
+            padding: 12px 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #333;
+        }
+        .error-message {
+            color: red;
+            margin-bottom: 20px;
+        }
+        button {
+            user-select: none;
+            width: 100%;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+          button:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+        .login-link {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        .login-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        .show-password-container {
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Ortalamak için */
+            margin-bottom: 20px;
+        }
+        .show-password-container input[type="checkbox"] {
+            transform: scale(1.5); /* Checkbox'ı büyütmek için */
+            margin-left: 10px;
+        }
+    </style>
+    <script>
+        function togglePasswordVisibility(id, checkboxId) {
+            var passwordField = document.getElementById(id);
+            var checkbox = document.getElementById(checkboxId);
+
+            if (checkbox.checked) {
+                passwordField.type = 'text';
+            } else {
+                passwordField.type = 'password';
+            }
+        }
+
+        function validateForm() {
+            var password = document.getElementById('password').value;
+            var password2 = document.getElementById('password2').value;
+            var errorMessage = '';
+
+            if (password !== password2) {
+                errorMessage = 'Passwords do not match.';
+            }
+
+            // Regex for password validation
+            var upperCasePattern = /[A-Z]/;
+            var lowerCasePattern = /[a-z]/;
+            var numberPattern = /[0-9]/;
+            var specialCharPattern = /[@$!%*?.&]/;
+
+            if (!upperCasePattern.test(password) ||
+                !lowerCasePattern.test(password) ||
+                !numberPattern.test(password) ||
+                !specialCharPattern.test(password)) {
+                errorMessage += (errorMessage ? ' ' : '') + 'Password must include uppercase, lowercase, number, and special character.';
+            }
+
+            if (errorMessage) {
+                document.getElementById('error-message').innerText = errorMessage;
+                return false; // Prevent form submission
+            }
+            return true; // Allow form submission
+        }
+    </script>
+</head>
+<body>
+<div class="signup-container">
+    <h2>Sign Up</h2>
+
+    <!-- Hata mesajını göstermek için -->
+    <div id="error-message" class="error-message" th:text="${error}"></div>
+
+    <form th:action="@{/signup}" method="post" th:object="${user}" onsubmit="return validateForm()">
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" th:field="*{email}" required>
+        </div>
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" th:field="*{username}" required>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <div class="show-password-container">
+                <input type="password" id="password" th:field="*{password}" required>
+                <div>
+                    <input type="checkbox" id="show-password1" onclick="togglePasswordVisibility('password', 'show-password1')">
+                    <label for="show-password1">Show</label>
+                </div>
+            </div>
+        </div>
+        <div>
+            <label for="password2">Confirm Password:</label>
+            <div class="show-password-container">
+                <input type="password" id="password2" th:field="*{password2}" required>
+                <div>
+                    <input type="checkbox" id="show-password2" onclick="togglePasswordVisibility('password2', 'show-password2')">
+                    <label for="show-password2">Show</label>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button type="submit">Sign Up</button>
+        </div>
+    </form>
+    <p class="login-link">Already have an account? <a th:href="@{/login}">Login here</a></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Article List</title>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .article-item {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .article-item h2 {
+            margin: 0 0 10px 0;
+        }
+        .article-item p {
+            margin: 0 0 10px 0;
+        }
+        .article-item .date {
+            color: #4555;
+        }
+
+        /* Home butonunun stili */
+        .home-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: #007bff; /* Mavi renk */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .home-button:hover {
+            background-color: #0056b3; /* Daha koyu mavi hover rengi */
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Article List</h1>
+    <div th:each="article : ${articles}" class="article-item">
+        <h2 th:text="${article.title}">Article Title</h2>
+        <p th:text="${article.content}">Article Content</p>
+        <p><strong>Author:</strong> <span th:text="${article.author}">Author Name</span></p>
+        <p class="date"><strong>Published Date:</strong> <span th:text="${article.publishedDate}">Published Date</span></p>
+    </div>
+</div>
+
+<!-- Sol alt köşeye home butonu -->
+<a th:href="@{/home}" class="home-button">Home</a>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        a, .button {
+            display: inline-block;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #007bff;
+            padding: 12px 25px;
+            border-radius: 6px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-weight: 600;
+            margin: 10px;
+            font-size: 1.1em;
+        }
+
+        a:hover, .button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .button {
+            cursor: pointer;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1em;
+            line-height: 1.2;
+        }
+
+        .button:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Welcome to the Home Page!</h1>
+    <p>Explore more by visiting other pages.</p>
+    <p>
+        <a th:href="@{/create}">Create Article</a>
+    </p>
+    <p>
+        <a class="button" th:href="@{/show}">Show Articles</a>
+    </p>
+</div>
+</body>
+</html>
